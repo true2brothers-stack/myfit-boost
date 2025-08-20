@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, User, Gift, LogIn } from "lucide-react";
+import { Home, User, Gift, LogIn, Package } from "lucide-react";
 
 const BottomNav = () => {
   const location = useLocation();
@@ -9,6 +9,11 @@ const BottomNav = () => {
       path: "/",
       icon: Home,
       label: "Inicio"
+    },
+    {
+      path: "/my-products",
+      icon: Package,
+      label: "Mis Productos"
     },
     {
       path: "/profile",
