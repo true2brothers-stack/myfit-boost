@@ -67,51 +67,50 @@ const MyProducts = () => {
         </p>
       </div>
 
-      {/* Products List - One card per row */}
-      <div className="px-6 pb-6 space-y-6">
+      {/* Netflix-style Products Grid */}
+      <div className="px-4 pb-6 space-y-4">
         {products.map((product, index) => (
-          <div key={product.id} className="w-full">
-            <Link
-              to={`/product/${product.id}`}
-              className="block fitness-card group hover:shadow-lg transition-all duration-300"
-            >
-              {/* Card Content */}
-              <div className="p-6">
-                {/* Title and Subtitle Section */}
-                <div className="mb-4">
-                  <div className="flex items-start justify-between mb-2">
-                    <h2 className="font-heading text-lg md:text-xl font-bold text-navy group-hover:text-coral transition-colors flex-1 pr-4">
-                      {product.title}
-                    </h2>
-                    {/* Extra badge for marathon guides */}
-                    {(index === 4 || index === 5) && (
-                      <span className="bg-coral text-white text-xs font-bold px-2 py-1 rounded-full">
-                        EXTRA
-                      </span>
-                    )}
-                  </div>
-                  <p className="font-body text-muted-foreground text-sm md:text-base leading-relaxed">
-                    {product.subtitle}
-                  </p>
+          <Link
+            key={product.id}
+            to={`/product/${product.id}`}
+            className="netflix-card group block relative overflow-hidden rounded-xl"
+          >
+            {/* Full Image Background */}
+            <div className="relative aspect-[16/9] overflow-hidden">
+              <img
+                src={product.image}
+                alt={product.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              
+              {/* Dark Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              {/* Extra Badge */}
+              {(index === 4 || index === 5) && (
+                <div className="absolute top-4 right-4 bg-coral text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                  EXTRA
                 </div>
-
-                {/* Product Image */}
-                <div className="relative overflow-hidden rounded-xl">
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  {/* Overlay with download icon */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 rounded-full p-3">
-                      <Download className="w-6 h-6 text-navy" />
-                    </div>
-                  </div>
+              )}
+              
+              {/* Download Icon - Appears on Hover */}
+              <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                <div className="bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg">
+                  <Download className="w-5 h-5 text-navy" />
                 </div>
               </div>
-            </Link>
-          </div>
+            </div>
+            
+            {/* Content Overlay - Bottom */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <h2 className="font-heading text-xl md:text-2xl font-bold mb-2 group-hover:text-coral transition-colors">
+                {product.title}
+              </h2>
+              <p className="font-body text-white/90 text-sm md:text-base leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                {product.subtitle}
+              </p>
+            </div>
+          </Link>
         ))}
       </div>
 
