@@ -52,6 +52,10 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Custom brand colors
+				coral: 'hsl(var(--coral))',
+				turquoise: 'hsl(var(--turquoise))',
+				navy: 'hsl(var(--navy))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -62,6 +66,10 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				}
+			},
+			fontFamily: {
+				heading: ['Poppins', 'system-ui', 'sans-serif'],
+				body: ['Open Sans', 'system-ui', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

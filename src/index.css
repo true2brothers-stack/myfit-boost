@@ -2,41 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Fitness App Design System - Colors, gradients, fonts, animations */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap');
 
 @layer base {
   :root {
+    /* Base colors - Fitness App Theme */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 218 27% 16%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Brand Colors */
+    --coral: 0 70% 70%;           /* #FF6B6B - energia, vitalidade */
+    --turquoise: 173 82% 59%;     /* #4ECDC4 - frescor, saúde */
+    --navy: 231 76% 18%;          /* #1A1A40 - contraste, equilíbrio */
+    --white: 0 0% 100%;           /* #FFFFFF - limpo, minimalista */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Primary Theme */
+    --primary: var(--coral);
+    --primary-foreground: var(--white);
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Secondary Theme */
+    --secondary: var(--turquoise);
+    --secondary-foreground: var(--navy);
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Accent */
+    --accent: var(--navy);
+    --accent-foreground: var(--white);
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Card system */
+    --card: var(--white);
+    --card-foreground: var(--navy);
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* UI Elements */
+    --muted: 0 0% 96%;
+    --muted-foreground: 218 27% 46%;
+    
+    --border: 0 0% 90%;
+    --input: 0 0% 95%;
+    --ring: var(--coral);
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: var(--white);
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--coral)), hsl(var(--turquoise)));
+    --gradient-card: linear-gradient(135deg, hsl(var(--white)), hsl(0 0% 98%));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--turquoise)), hsl(var(--navy)));
 
-    --radius: 0.5rem;
+    /* Shadows */
+    --shadow-card: 0 4px 16px hsl(var(--coral) / 0.1);
+    --shadow-card-hover: 0 8px 32px hsl(var(--coral) / 0.15);
+    --shadow-glow: 0 0 24px hsl(var(--turquoise) / 0.3);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -54,44 +78,6 @@ All colors MUST be HSL.
 
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
 }
 
 @layer base {
@@ -100,6 +86,82 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  /* Card Component Styles */
+  .fitness-card {
+    @apply relative overflow-hidden rounded-2xl bg-card transition-all duration-300;
+    box-shadow: var(--shadow-card);
+  }
+
+  .fitness-card:hover {
+    @apply -translate-y-1;
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .fitness-card-gradient {
+    background: var(--gradient-card);
+  }
+
+  /* Button Variants */
+  .btn-hero {
+    background: var(--gradient-hero);
+    @apply text-white font-semibold px-8 py-4 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground font-semibold px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105;
+  }
+
+  /* Grid System */
+  .product-grid {
+    @apply grid grid-cols-2 gap-4 md:gap-6 p-4 md:p-6;
+  }
+
+  /* Gradient Backgrounds */
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  /* Glow Effects */
+  .glow-turquoise {
+    box-shadow: var(--shadow-glow);
+  }
+}
+
+@layer utilities {
+  /* Font Families */
+  .font-heading {
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+
+  .font-body {
+    font-family: 'Open Sans', system-ui, sans-serif;
+  }
+
+  /* Smooth Animations */
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .transition-spring {
+    transition: var(--transition-spring);
+  }
+
+  /* Custom Spacing */
+  .safe-area-inset {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }
