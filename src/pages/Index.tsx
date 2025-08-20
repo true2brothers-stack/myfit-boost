@@ -59,25 +59,31 @@ const Index = () => {
       </div>
 
       {/* Products Grid */}
-      <div className="product-grid max-w-md mx-auto">
-        {products.map((product) => (
+      <div className="product-grid max-w-lg mx-auto">
+        {products.map((product, index) => (
           <Link
             key={product.id}
             to={`/product/${product.id}`}
-            className="fitness-card fitness-card-gradient block group"
+            className="fitness-card block group relative"
           >
-            <div className="aspect-square overflow-hidden rounded-t-2xl">
+            {/* Extra badge for cards 5 and 6 (marathon guides) */}
+            {(index === 4 || index === 5) && (
+              <div className="extra-badge">
+                EXTRA
+              </div>
+            )}
+            <div className="aspect-[4/3] overflow-hidden">
               <img
                 src={product.image}
                 alt={product.title}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
-            <div className="p-4">
-              <h3 className="font-heading font-semibold text-navy text-sm md:text-base mb-1">
+            <div className="fitness-card-overlay">
+              <h3 className="font-heading font-bold text-lg mb-1">
                 {product.title}
               </h3>
-              <p className="font-body text-muted-foreground text-xs md:text-sm">
+              <p className="font-body text-white/90 text-sm">
                 {product.description}
               </p>
             </div>
